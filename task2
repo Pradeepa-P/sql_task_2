@@ -1,0 +1,39 @@
+create table customers
+(cust_id INT PRIMARY KEY,
+cust_name varchar(50),
+city varchar(50)
+);
+
+create table orders(
+order_id int primary key,
+order_date varchar(50),
+cust_id int,
+amount DECIMAL(10,2),
+FOREIGN KEY (cust_id) REFERENCES customers(cust_id)
+);
+
+-- Insert customers
+INSERT INTO customers (cust_id, cust_name, city) VALUES
+(1, 'Arun', 'Chennai'),
+(2, 'Priya', 'Bangalore'),
+(3, 'Rahul', 'Mumbai'),
+(4, 'Sneha', 'Delhi'),
+(5, 'Kiran', 'Hyderabad');
+
+-- Insert orders
+INSERT INTO orders (order_id, order_date, cust_id, amount) VALUES
+(101, '2024-01-10', 1, 2500.00),
+(102, '2024-01-12', 2, 1500.00),
+(103, '2024-01-15', 1, 3000.00),
+(104, '2024-01-18', 3, 2000.00),
+(105, '2024-01-20', 4, 1800.00);
+
+select c.cust_name,o.order_id,o.order_date
+from customers c
+inner join orders o
+on c.cust_id = o.cust_id;
+
+select c.cust_name,o.order_id,o.order_date
+from customers c
+left join orders o
+on c.cust_id = o.cust_id;
